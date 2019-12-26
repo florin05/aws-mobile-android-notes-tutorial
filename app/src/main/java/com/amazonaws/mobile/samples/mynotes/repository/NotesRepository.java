@@ -16,7 +16,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.amazonaws.mobile.samples.mynotes.repository;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 
@@ -26,56 +28,59 @@ import com.amazonaws.mobile.samples.mynotes.models.ResultCallback;
 import com.amazonaws.mobile.samples.mynotes.services.DataService;
 
 public class NotesRepository {
-    private LiveData<PagedList<Note>> pagedList;
-    private LiveData<NotesDataSource> dataSource;
+    //private LiveData<PagedList<Note>> pagedList;
+    //public MutableLiveData<DriverStatusInfo> driverStatus;
+    private NotesDataSource dataSource;
 
     public NotesRepository(DataService dataService) {
         NotesDataSourceFactory factory = new NotesDataSourceFactory(dataService);
         dataSource = factory.getCurrentDataSource();
-        pagedList = new LivePagedListBuilder<>(factory, 20).build();
+        // pagedList = new LivePagedListBuilder<>(factory, 20).build();
+        //driverStatus = new MutableLiveData<>();
+        // getDriverStatus((DriverStatusInfo status) -> driverStatus.postValue(status) );
     }
 
     /**
      * An observable lifecycle-aware version of the paged list of notes.  This is used
      * to render a RecyclerView of all the notes.
      */
-    public LiveData<PagedList<Note>> getPagedList() {
+/*    public LiveData<PagedList<Note>> getPagedList() {
         return pagedList;
-    }
+    }*/
 
     /**
      * API operation to create an item in the data store
      */
     public void create(String title, String content, ResultCallback<Note> callback) {
-        dataSource.getValue().createItem(title, content, callback);
+        dataSource.createItem(title, content, callback);
     }
 
     /**
      * API operation to update an item in the data store
      */
     public void update(Note note, ResultCallback<Note> callback) {
-        dataSource.getValue().updateItem(note, callback);
+        dataSource.updateItem(note, callback);
     }
 
     /**
      * API operation to delete an item from the data store
      */
     public void delete(String noteId, ResultCallback<Boolean> callback) {
-        dataSource.getValue().deleteItem(noteId, callback);
+        dataSource.deleteItem(noteId, callback);
     }
 
     /**
      * API operation to get an item from the data store
      */
     public void get(String noteId, ResultCallback<Note> callback) {
-        dataSource.getValue().getItem(noteId, callback);
+        dataSource.getItem(noteId, callback);
     }
 
     public void getDriverStatus(ResultCallback<DriverStatusInfo> callback) {
-        dataSource.getValue().getDriverStatus(callback);
+        dataSource.getDriverStatus(callback);
     }
 
     public void updateDriverStatus(DriverStatusInfo statusInfo, ResultCallback<DriverStatusInfo> callback) {
-        dataSource.getValue().updateDriverStatus(statusInfo, callback);
+        dataSource.updateDriverStatus(statusInfo, callback);
     }
 }

@@ -34,7 +34,7 @@ import java.util.Locale;
  */
 public class MockDataService implements DataService {
     private ArrayList<Note> items;
-    private DriverStatusInfo status = new DriverStatusInfo(DriverStatus.UNAVILABLE);
+    private DriverStatusInfo status;
 
     public MockDataService() {
         items = new ArrayList<>();
@@ -44,6 +44,8 @@ public class MockDataService implements DataService {
             item.setContent(String.format(Locale.US, "Content for note %d", i));
             items.add(item);
         }
+
+        status = new DriverStatusInfo(DriverStatus.UNAVILABLE);
     }
 
     /**

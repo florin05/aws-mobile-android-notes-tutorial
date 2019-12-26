@@ -14,7 +14,7 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 <resources>
-    <string name="app_name">AWSome Notes</string>
+    <string name="app_name">STAT Pickup Logistics App</string>
     <string name="title_note_detail">Note Detail</string>
     <string name="title_hint">Note Title</string>
     <string name="content_hint">Content</string>

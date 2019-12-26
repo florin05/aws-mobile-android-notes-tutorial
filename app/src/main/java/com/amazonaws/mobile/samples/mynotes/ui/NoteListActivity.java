@@ -26,12 +26,15 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
+import android.widget.TextView;
 
 import com.amazonaws.mobile.samples.mynotes.Injection;
 import com.amazonaws.mobile.samples.mynotes.NotesApp;
 import com.amazonaws.mobile.samples.mynotes.R;
+import com.amazonaws.mobile.samples.mynotes.models.DriverStatusInfo;
 import com.amazonaws.mobile.samples.mynotes.models.Note;
 import com.amazonaws.mobile.samples.mynotes.services.AnalyticsService;
+import com.amazonaws.mobile.samples.mynotes.viewmodels.DriverStatusViewModel;
 import com.amazonaws.mobile.samples.mynotes.viewmodels.NoteListViewModel;
 
 import java.util.HashMap;
@@ -66,6 +69,16 @@ public class NoteListActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getTitle());
 
+
+        final TextView statusTextField = findViewById(R.id.status_text);
+        //viewModel.readDriverStatus();
+
+        // Observe the view model values.  Once we receive the value, enable the field.
+        viewModel.getStatus().observe(this, (DriverStatusInfo statusInfo) -> {
+            statusTextField.setText(statusInfo.getStatus().getLabel());
+        });
+
+
         // Add an item click handler to the floating action button for adding a note
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener((View v) -> loadNoteDetailFragment("new"));
@@ -80,10 +93,10 @@ public class NoteListActivity extends AppCompatActivity {
         // Configure the note list
         RecyclerView note_list = findViewById(R.id.note_list);
         swipeToDelete.attachToRecyclerView(note_list);
-        note_list.setAdapter(adapter);
+        // note_list.setAdapter(adapter);
 
         // Ensure the note list is updated whenever the repository is updated
-        viewModel.getNotesList().observe(this, adapter::submitList);
+        // viewModel.getNotesList().observe(this, adapter::submitList);
     }
 
     @Override

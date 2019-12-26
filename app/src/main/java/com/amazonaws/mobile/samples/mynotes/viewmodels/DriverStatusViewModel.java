@@ -23,11 +23,11 @@ public class DriverStatusViewModel extends ViewModel {
         this.mStatus = new MutableLiveData<>();
     }
 
-    public void readStatus() {
+/*    public void readStatus() {
         notesRepository.getDriverStatus((DriverStatusInfo status) -> {
             mStatus.postValue(status);
         });
-    }
+    }*/
 
     public LiveData<DriverStatusInfo> getStatus() {
         return mStatus;

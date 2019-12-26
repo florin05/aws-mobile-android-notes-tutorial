@@ -37,14 +37,46 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@+id/my_status"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            tools:context=".ui.DriverStatusFragment">
+
+            <TextView
+                android:id="@+id/status_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TBD" />
+        </FrameLayout>
+
+<!--        <FrameLayout
+            android:id="@+id/frame_list_container"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+            <include layout="@layout/note_list" />
+        </FrameLayout>-->
+
+    </LinearLayout>
+
+
+<!--    <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <include layout="@layout/note_list" />
-    </FrameLayout>
+
+
+    </FrameLayout>-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

@@ -53,6 +53,7 @@ public class NotesDataSource extends PageKeyedDataSource<String,Note> {
         dataService.loadNotes(params.requestedLoadSize, null, (PagedListConnectionResponse<Note> result) -> {
             callback.onResult(result.getItems(), null, result.getNextToken());
         });
+        //dataService.getDriverStatus();
     }
 
     /**

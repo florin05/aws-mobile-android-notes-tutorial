@@ -30,23 +30,25 @@ import com.amazonaws.mobile.samples.mynotes.services.DataService;
  */
 public class NotesDataSourceFactory extends DataSource.Factory<String, Note> {
     private DataService dataService;
-    private MutableLiveData<NotesDataSource> mDataSource;
-    private LiveData<NotesDataSource> currentDataSource;
+    // private MutableLiveData<NotesDataSource> mDataSource;
+    private NotesDataSource mDataSource;
+    // private LiveData<NotesDataSource> currentDataSource;
 
     NotesDataSourceFactory(DataService dataService) {
         this.dataService = dataService;
-        mDataSource = new MutableLiveData<>();
-        currentDataSource = mDataSource;
+        mDataSource = new NotesDataSource(dataService);
+        // mDataSource = new MutableLiveData<>();
+        // currentDataSource = mDataSource;
     }
 
-    public LiveData<NotesDataSource> getCurrentDataSource() {
-        return currentDataSource;
+    public NotesDataSource getCurrentDataSource() {
+        return mDataSource;
     }
 
     @Override
     public DataSource<String, Note> create() {
-        NotesDataSource dataSource = new NotesDataSource(dataService);
-        mDataSource.postValue(dataSource);
-        return dataSource;
+        //NotesDataSource dataSource = new NotesDataSource(dataService);
+        mDataSource = new NotesDataSource(dataService);
+        return mDataSource;
     }
 }

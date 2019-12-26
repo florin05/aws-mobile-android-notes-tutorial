@@ -16,24 +16,46 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.amazonaws.mobile.samples.mynotes.viewmodels;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.arch.paging.PagedList;
 
 import com.amazonaws.mobile.samples.mynotes.Injection;
+import com.amazonaws.mobile.samples.mynotes.models.DriverStatus;
+import com.amazonaws.mobile.samples.mynotes.models.DriverStatusInfo;
 import com.amazonaws.mobile.samples.mynotes.models.Note;
 import com.amazonaws.mobile.samples.mynotes.models.ResultCallback;
 import com.amazonaws.mobile.samples.mynotes.repository.NotesRepository;
 
 public class NoteListViewModel extends ViewModel {
+    private MutableLiveData<DriverStatusInfo> mStatus;
     private NotesRepository notesRepository;
 
     public NoteListViewModel() {
         this.notesRepository = Injection.getNotesRepository();
+        this.mStatus = new MutableLiveData<>();
+        // mStatus.postValue(new DriverStatusInfo(DriverStatus.UNAVILABLE));
+        notesRepository.getDriverStatus((DriverStatusInfo status) -> {
+            mStatus.postValue(status);
+        });
+
     }
 
-    public LiveData<PagedList<Note>> getNotesList() {
+/*    public void readDriverStatus() {
+        notesRepository.getDriverStatus((DriverStatusInfo status) -> {
+            mStatus.postValue(status);
+        });
+    };*/
+
+
+/*    public LiveData<PagedList<Note>> getNotesList() {
         return notesRepository.getPagedList();
+    }*/
+
+    public LiveData<DriverStatusInfo> getStatus() {
+        return mStatus;
     }
 
     public void removeNote(String noteId) {
