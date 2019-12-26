@@ -20,6 +20,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 
+import com.amazonaws.mobile.samples.mynotes.models.DriverStatusInfo;
 import com.amazonaws.mobile.samples.mynotes.models.Note;
 import com.amazonaws.mobile.samples.mynotes.models.ResultCallback;
 import com.amazonaws.mobile.samples.mynotes.services.DataService;
@@ -68,5 +69,13 @@ public class NotesRepository {
      */
     public void get(String noteId, ResultCallback<Note> callback) {
         dataSource.getValue().getItem(noteId, callback);
+    }
+
+    public void getDriverStatus(ResultCallback<DriverStatusInfo> callback) {
+        dataSource.getValue().getDriverStatus(callback);
+    }
+
+    public void updateDriverStatus(DriverStatusInfo statusInfo, ResultCallback<DriverStatusInfo> callback) {
+        dataSource.getValue().updateDriverStatus(statusInfo, callback);
     }
 }

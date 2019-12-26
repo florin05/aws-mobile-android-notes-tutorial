@@ -16,6 +16,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.amazonaws.mobile.samples.mynotes.services;
 
+import com.amazonaws.mobile.samples.mynotes.models.DriverStatus;
+import com.amazonaws.mobile.samples.mynotes.models.DriverStatusInfo;
 import com.amazonaws.mobile.samples.mynotes.models.Note;
 import com.amazonaws.mobile.samples.mynotes.models.PagedListConnectionResponse;
 import com.amazonaws.mobile.samples.mynotes.models.ResultCallback;
@@ -66,5 +68,11 @@ public interface DataService {
      * @param callback the response from the server (Boolean = true indicates success)
      */
     void deleteNote(String noteId, ResultCallback<Boolean> callback);
+
+
+    void getDriverStatus(ResultCallback<DriverStatusInfo> callback);
+
+    void updateDriverStatus(DriverStatusInfo status, ResultCallback<DriverStatusInfo> callback);
+
 
 }

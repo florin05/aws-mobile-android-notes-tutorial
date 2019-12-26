@@ -20,6 +20,7 @@ import android.arch.paging.PageKeyedDataSource;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.amazonaws.mobile.samples.mynotes.models.DriverStatusInfo;
 import com.amazonaws.mobile.samples.mynotes.models.Note;
 import com.amazonaws.mobile.samples.mynotes.models.PagedListConnectionResponse;
 import com.amazonaws.mobile.samples.mynotes.models.ResultCallback;
@@ -116,4 +117,13 @@ public class NotesDataSource extends PageKeyedDataSource<String,Note> {
             callback.onResult(result);
         });
     }
+
+    public void getDriverStatus( @NonNull ResultCallback<DriverStatusInfo> callback) {
+        dataService.getDriverStatus(callback);
+    }
+
+    public void updateDriverStatus( DriverStatusInfo status,@NonNull ResultCallback<DriverStatusInfo> callback) {
+        dataService.updateDriverStatus(status, callback);
+    }
+
 }

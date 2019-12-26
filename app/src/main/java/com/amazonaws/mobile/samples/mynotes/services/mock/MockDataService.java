@@ -16,6 +16,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.amazonaws.mobile.samples.mynotes.services.mock;
 
+import com.amazonaws.mobile.samples.mynotes.models.DriverStatus;
+import com.amazonaws.mobile.samples.mynotes.models.DriverStatusInfo;
 import com.amazonaws.mobile.samples.mynotes.models.Note;
 import com.amazonaws.mobile.samples.mynotes.models.PagedListConnectionResponse;
 import com.amazonaws.mobile.samples.mynotes.models.ResultCallback;
@@ -32,10 +34,11 @@ import java.util.Locale;
  */
 public class MockDataService implements DataService {
     private ArrayList<Note> items;
+    private DriverStatusInfo status = new DriverStatusInfo(DriverStatus.UNAVILABLE);
 
     public MockDataService() {
         items = new ArrayList<>();
-        for (int i = 0 ; i < 30 ; i++) {
+        for (int i = 0 ; i < 5 ; i++) {
             Note item = new Note();
             item.setTitle(String.format(Locale.US, "Note %d", i));
             item.setContent(String.format(Locale.US, "Content for note %d", i));
@@ -152,5 +155,14 @@ public class MockDataService implements DataService {
                 return i;
         }
         return -1;
+    }
+
+    public void getDriverStatus(ResultCallback<DriverStatusInfo> callback) {
+        callback.onResult(this.status);
+    }
+
+    public void updateDriverStatus(DriverStatusInfo status, ResultCallback<DriverStatusInfo> callback) {
+        this.status = status;
+        callback.onResult(this.status);
     }
 }
