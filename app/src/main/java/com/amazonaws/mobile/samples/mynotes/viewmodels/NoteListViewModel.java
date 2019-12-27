@@ -58,6 +58,13 @@ public class NoteListViewModel extends ViewModel {
         return mStatus;
     }
 
+    public synchronized void changeStatus(DriverStatus newStatus) {
+        DriverStatusInfo updatedStatus = new DriverStatusInfo(newStatus);
+        notesRepository.updateDriverStatus(updatedStatus, (DriverStatusInfo status) -> {
+            mStatus.postValue(status);
+        });
+    }
+
     public void removeNote(String noteId) {
         notesRepository.delete(noteId, new ResultCallback<Boolean>() {
             @Override

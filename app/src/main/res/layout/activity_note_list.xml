@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this
@@ -15,77 +14,103 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTIO
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".ui.NoteListActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+    <data>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <variable
+            name="driverStatusInfo"
+            type="com.amazonaws.mobile.samples.mynotes.models.DriverStatusInfo" />
+    </data>
 
-    </android.support.design.widget.AppBarLayout>
-
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:orientation="vertical" >
+        android:fitsSystemWindows="true"
+        tools:context=".ui.NoteListActivity">
 
-        <FrameLayout
-            android:id="@+id/my_status"
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            tools:context=".ui.DriverStatusFragment">
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-            <TextView
-                android:id="@+id/status_text"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/my_status"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background='@{driverStatusInfo.status.isAvailable()? @color/statusGreen : @color/statusRed}'>
+
+                <TextView
+                    android:id="@+id/status_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="will be updated"
+                    android:textAlignment="center"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/status_change_button"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TBD" />
-        </FrameLayout>
+                android:textSize="20dp"
+                android:layout_margin="20dp"
+                android:padding="16dp"
+                android:text="updated dynamically" />
 
-<!--        <FrameLayout
-            android:id="@+id/frame_list_container"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="0dp">
-            <include layout="@layout/note_list" />
-        </FrameLayout>-->
+            <!--        <FrameLayout
+                        android:id="@+id/frame_list_container"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="0dp">
+                        <include layout="@layout/note_list" />
+                    </FrameLayout>-->
 
-    </LinearLayout>
-
-
-<!--    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <include layout="@layout/note_list" />
+        </LinearLayout>
 
 
-    </FrameLayout>-->
+        <!--    <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:tint="@android:color/white"
-        app:srcCompat="@android:drawable/ic_input_add" />
+                <include layout="@layout/note_list" />
 
 
-</android.support.design.widget.CoordinatorLayout>
+            </FrameLayout>-->
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:tint="@android:color/white"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

@@ -15,5 +15,13 @@ public enum DriverStatus {
     public String getLabel() {
         return label;
     }
+    public String getStatusChangeLabel() {
+        return this.compareTo(DriverStatus.AVAILALBLE) == 0 ?
+                "Change to Unavailable": "Change to Available";
+    }
+    public Boolean isAvailable() {
+        return this.compareTo(DriverStatus.AVAILALBLE) == 0;
+    }
+
 
 }

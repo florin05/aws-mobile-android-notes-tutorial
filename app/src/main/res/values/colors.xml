@@ -17,4 +17,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="statusGreen">#49CA02</color>
+    <color name="statusRed">#FFB7B3</color>
+
 </resources>

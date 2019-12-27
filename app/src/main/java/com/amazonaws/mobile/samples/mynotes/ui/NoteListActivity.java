@@ -18,6 +18,7 @@ package com.amazonaws.mobile.samples.mynotes.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -26,11 +27,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.amazonaws.mobile.samples.mynotes.Injection;
 import com.amazonaws.mobile.samples.mynotes.NotesApp;
 import com.amazonaws.mobile.samples.mynotes.R;
+import com.amazonaws.mobile.samples.mynotes.databinding.ActivityNoteListBinding;
+import com.amazonaws.mobile.samples.mynotes.models.DriverStatus;
 import com.amazonaws.mobile.samples.mynotes.models.DriverStatusInfo;
 import com.amazonaws.mobile.samples.mynotes.models.Note;
 import com.amazonaws.mobile.samples.mynotes.services.AnalyticsService;
@@ -46,6 +50,8 @@ public class NoteListActivity extends AppCompatActivity {
      * pane mode, the list and details are separate pages.
      */
     private boolean twoPane = false;
+    private DriverStatusInfo driverStatus;
+    private ActivityNoteListBinding  binding;
 
     /**
      * The view model
@@ -63,6 +69,10 @@ public class NoteListActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(NoteListViewModel.class);
         setContentView(R.layout.activity_note_list);
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_note_list);
+        binding.setDriverStatusInfo(driverStatus);
+
         if (findViewById(R.id.note_detail_container) != null) twoPane = true;
 
         // Configure the action bar
@@ -71,13 +81,25 @@ public class NoteListActivity extends AppCompatActivity {
 
 
         final TextView statusTextField = findViewById(R.id.status_text);
+        final Button statusChangeButton = findViewById(R.id.status_change_button);
         //viewModel.readDriverStatus();
 
         // Observe the view model values.  Once we receive the value, enable the field.
         viewModel.getStatus().observe(this, (DriverStatusInfo statusInfo) -> {
+            driverStatus = statusInfo;
+            binding.setDriverStatusInfo(driverStatus);
             statusTextField.setText(statusInfo.getStatus().getLabel());
+            statusChangeButton.setText(statusInfo.getStatus().getStatusChangeLabel());
         });
 
+        statusChangeButton.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                viewModel.changeStatus(driverStatus.getStatus() == DriverStatus.AVAILALBLE ? DriverStatus.UNAVILABLE : DriverStatus.AVAILALBLE);
+            }
+        });
 
         // Add an item click handler to the floating action button for adding a note
         FloatingActionButton fab = findViewById(R.id.fab);
