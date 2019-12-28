@@ -1,5 +1,6 @@
 package com.amazonaws.mobile.samples.mynotes.services.aws;
 
+import com.amazonaws.mobile.auth.userpools.CognitoUserPoolsSignInProvider;
 import android.content.Context;
 
 import com.amazonaws.mobile.auth.core.IdentityManager;
@@ -12,6 +13,7 @@ public class AWSService {
     public AWSService(Context context) {
         awsConfiguration = new AWSConfiguration(context);
         identityManager = new IdentityManager(context, awsConfiguration);
+        identityManager.addSignInProvider(CognitoUserPoolsSignInProvider.class);
         IdentityManager.setDefaultIdentityManager(identityManager);
     }
 

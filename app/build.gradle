@@ -69,4 +69,9 @@ dependencies {
     implementation "com.amazonaws:aws-android-sdk-core:$aws_version"
     implementation "com.amazonaws:aws-android-sdk-auth-core:$aws_version@aar"
     implementation "com.amazonaws:aws-android-sdk-pinpoint:$aws_version"
+
+    implementation "com.amazonaws:aws-android-sdk-auth-ui:$aws_version@aar"
+    implementation "com.amazonaws:aws-android-sdk-auth-userpools:$aws_version@aar"
+    implementation "com.amazonaws:aws-android-sdk-cognitoidentityprovider:$aws_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }

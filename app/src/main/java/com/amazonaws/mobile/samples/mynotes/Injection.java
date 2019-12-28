@@ -46,6 +46,10 @@ public class Injection {
         return notesRepository;
     }
 
+    public static synchronized AWSService getAWSService() {
+        return awsService;
+    }
+
     public static synchronized void initialize(Context context) {
         if (awsService == null) {
             awsService = new AWSService(context);
