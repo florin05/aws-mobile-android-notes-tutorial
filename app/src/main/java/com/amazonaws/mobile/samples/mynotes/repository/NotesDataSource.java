@@ -16,17 +16,21 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.amazonaws.mobile.samples.mynotes.repository;
 
-import android.arch.paging.PageKeyedDataSource;
-import android.support.annotation.NonNull;
+import androidx.paging.PageKeyedDataSource;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
+import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobile.samples.mynotes.Injection;
+import com.amazonaws.mobile.samples.mynotes.models.DriverStatus;
 import com.amazonaws.mobile.samples.mynotes.models.DriverStatusInfo;
 import com.amazonaws.mobile.samples.mynotes.models.Note;
 import com.amazonaws.mobile.samples.mynotes.models.PagedListConnectionResponse;
 import com.amazonaws.mobile.samples.mynotes.models.ResultCallback;
 import com.amazonaws.mobile.samples.mynotes.services.DataService;
+import com.amazonaws.mobile.samples.mynotes.services.aws.AWSDataService;
 
-import javax.xml.transform.Result;
+import java.util.Map;
 
 /**
  * A DataSource implements a paging system for a RecyclerView.  This one uses the DataService
@@ -120,11 +124,19 @@ public class NotesDataSource extends PageKeyedDataSource<String,Note> {
     }
 
     public void getDriverStatus( @NonNull ResultCallback<DriverStatusInfo> callback) {
-        dataService.getDriverStatus(callback);
+        try {
+            dataService.getDriverStatusInfo(AWSDataService.loggedInUserName, (status) -> {
+                if (status == null) {
+                    dataService.createDriverStatusInfo(AWSDataService.loggedInUserName, DriverStatus.UNAVAILABLE, callback);
+                } else callback.onResult(status);
+            });
+        } catch(Exception e) {
+            Log.e(TAG, "getDriverStatus error " + e.toString());
+        }
     }
 
     public void updateDriverStatus( DriverStatusInfo status,@NonNull ResultCallback<DriverStatusInfo> callback) {
-        dataService.updateDriverStatus(status, callback);
+        dataService.updateDriverStatusInfo(status, callback);
     }
 
 }

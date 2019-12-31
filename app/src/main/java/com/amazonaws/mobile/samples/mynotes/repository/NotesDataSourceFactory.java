@@ -16,9 +16,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.amazonaws.mobile.samples.mynotes.repository;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.paging.DataSource;
+import androidx.paging.DataSource;
 
 import com.amazonaws.mobile.samples.mynotes.models.Note;
 import com.amazonaws.mobile.samples.mynotes.services.DataService;

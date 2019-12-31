@@ -4,7 +4,7 @@ import java.sql.Driver;
 
 public enum DriverStatus {
     AVAILALBLE("Available tp pickup STAT orders"),
-    UNAVILABLE("Unavailable to pickup STAT orders"),
+    UNAVAILABLE("Unavailable to pickup STAT orders"),
     ONROUTE("On Route to pickup STAT order");
     private final String label;
 

@@ -16,16 +16,16 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.amazonaws.mobile.samples.mynotes.ui;
 
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.helper.ItemTouchHelper;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,7 +38,6 @@ import com.amazonaws.mobile.samples.mynotes.models.DriverStatus;
 import com.amazonaws.mobile.samples.mynotes.models.DriverStatusInfo;
 import com.amazonaws.mobile.samples.mynotes.models.Note;
 import com.amazonaws.mobile.samples.mynotes.services.AnalyticsService;
-import com.amazonaws.mobile.samples.mynotes.viewmodels.DriverStatusViewModel;
 import com.amazonaws.mobile.samples.mynotes.viewmodels.NoteListViewModel;
 
 import java.util.HashMap;
@@ -97,7 +96,7 @@ public class NoteListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                viewModel.changeStatus(driverStatus.getStatus() == DriverStatus.AVAILALBLE ? DriverStatus.UNAVILABLE : DriverStatus.AVAILALBLE);
+                viewModel.changeStatus(driverStatus.getStatus() == DriverStatus.AVAILALBLE ? DriverStatus.UNAVAILABLE : DriverStatus.AVAILALBLE);
             }
         });
 

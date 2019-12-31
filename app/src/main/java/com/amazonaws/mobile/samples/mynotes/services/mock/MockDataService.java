@@ -45,7 +45,7 @@ public class MockDataService implements DataService {
             items.add(item);
         }
 
-        status = new DriverStatusInfo(DriverStatus.UNAVILABLE);
+        status = new DriverStatusInfo(DriverStatus.UNAVAILABLE);
     }
 
     /**
@@ -159,12 +159,19 @@ public class MockDataService implements DataService {
         return -1;
     }
 
-    public void getDriverStatus(ResultCallback<DriverStatusInfo> callback) {
+
+    public void createDriverStatusInfo(String userName, DriverStatus status, ResultCallback<DriverStatusInfo> callback) {
         callback.onResult(this.status);
     }
 
-    public void updateDriverStatus(DriverStatusInfo status, ResultCallback<DriverStatusInfo> callback) {
+    public void getDriverStatusInfo(String userName, ResultCallback<DriverStatusInfo> callback) {
+        callback.onResult(this.status);
+    }
+
+    public void updateDriverStatusInfo(DriverStatusInfo status, ResultCallback<DriverStatusInfo> callback) {
         this.status = status;
         callback.onResult(this.status);
     }
+
+
 }

@@ -16,27 +16,33 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.amazonaws.mobile.samples.mynotes.viewmodels;
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.arch.paging.PagedList;
+import android.location.Location;
+import android.location.LocationListener;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.paging.PagedList;
+
+import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.samples.mynotes.Injection;
 import com.amazonaws.mobile.samples.mynotes.models.DriverStatus;
 import com.amazonaws.mobile.samples.mynotes.models.DriverStatusInfo;
-import com.amazonaws.mobile.samples.mynotes.models.Note;
 import com.amazonaws.mobile.samples.mynotes.models.ResultCallback;
 import com.amazonaws.mobile.samples.mynotes.repository.NotesRepository;
+import com.amazonaws.mobile.samples.mynotes.services.aws.AWSDataService;
+
+import java.util.Map;
 
 public class NoteListViewModel extends ViewModel {
     private MutableLiveData<DriverStatusInfo> mStatus;
     private NotesRepository notesRepository;
 
+
     public NoteListViewModel() {
         this.notesRepository = Injection.getNotesRepository();
         this.mStatus = new MutableLiveData<>();
-        // mStatus.postValue(new DriverStatusInfo(DriverStatus.UNAVILABLE));
+        // mStatus.postValue(new DriverStatusInfo(DriverStatus.UNAVAILABLE));
         notesRepository.getDriverStatus((DriverStatusInfo status) -> {
             mStatus.postValue(status);
         });
@@ -59,7 +65,12 @@ public class NoteListViewModel extends ViewModel {
     }
 
     public synchronized void changeStatus(DriverStatus newStatus) {
+        String userName = AWSDataService.loggedInUserName;
+        // String userName = Injection.getAWSService().getIdentityManager().getCachedUserID();
         DriverStatusInfo updatedStatus = new DriverStatusInfo(newStatus);
+        updatedStatus.setUserName(userName);
+        updatedStatus.setId(mStatus.getValue().getId());
+        updatedStatus.setVersion(mStatus.getValue().getVersion());
         notesRepository.updateDriverStatus(updatedStatus, (DriverStatusInfo status) -> {
             mStatus.postValue(status);
         });

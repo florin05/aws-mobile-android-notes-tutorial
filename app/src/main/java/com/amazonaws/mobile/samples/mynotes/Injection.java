@@ -24,6 +24,8 @@ import com.amazonaws.mobile.samples.mynotes.services.DataService;
 import com.amazonaws.mobile.samples.mynotes.services.aws.AWSService;
 import com.amazonaws.mobile.samples.mynotes.services.mock.MockAnalyticsService;
 import com.amazonaws.mobile.samples.mynotes.services.mock.MockDataService;
+import com.amazonaws.mobile.samples.mynotes.services.aws.AWSDataService;
+
 
 /**
  * This is a "fake" dependency injection system.
@@ -60,7 +62,8 @@ public class Injection {
         }
 
         if (dataService == null) {
-            dataService = new MockDataService();
+            // dataService = new MockDataService();
+            dataService = new AWSDataService(context, awsService);
         }
 
         if (notesRepository == null) {

@@ -16,11 +16,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.amazonaws.mobile.samples.mynotes.repository;
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.paging.LivePagedListBuilder;
-import android.arch.paging.PagedList;
+import androidx.paging.LivePagedListBuilder;
+import androidx.paging.PagedList;
 
 import com.amazonaws.mobile.samples.mynotes.models.DriverStatusInfo;
 import com.amazonaws.mobile.samples.mynotes.models.Note;

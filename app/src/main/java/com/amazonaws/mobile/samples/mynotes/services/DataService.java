@@ -69,10 +69,12 @@ public interface DataService {
      */
     void deleteNote(String noteId, ResultCallback<Boolean> callback);
 
+    void createDriverStatusInfo(String userName, DriverStatus status, ResultCallback<DriverStatusInfo> callback);
 
-    void getDriverStatus(ResultCallback<DriverStatusInfo> callback);
+    void getDriverStatusInfo(String userName, ResultCallback<DriverStatusInfo> callback);
 
-    void updateDriverStatus(DriverStatusInfo status, ResultCallback<DriverStatusInfo> callback);
+    void updateDriverStatusInfo(DriverStatusInfo status, ResultCallback<DriverStatusInfo> callback);
+
 
 
 }

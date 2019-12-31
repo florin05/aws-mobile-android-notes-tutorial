@@ -16,12 +16,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.amazonaws.mobile.samples.mynotes.viewmodels;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.amazonaws.mobile.samples.mynotes.Injection;
-import com.amazonaws.mobile.samples.mynotes.models.DriverStatusInfo;
 import com.amazonaws.mobile.samples.mynotes.models.Note;
 import com.amazonaws.mobile.samples.mynotes.models.ResultCallback;
 import com.amazonaws.mobile.samples.mynotes.repository.NotesRepository;
