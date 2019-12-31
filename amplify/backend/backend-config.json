@@ -18,12 +18,22 @@
 			"providerPlugin": "awscloudformation",
 			"output": {
 				"authConfig": {
-					"additionalAuthenticationProviders": [],
+					"additionalAuthenticationProviders": [
+						{
+							"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+							"userPoolConfig": {
+								"userPoolId": "authcognito36220435"
+							}
+						},
+						{
+							"authenticationType": "AWS_IAM"
+						}
+					],
 					"defaultAuthentication": {
 						"authenticationType": "API_KEY",
 						"apiKeyConfig": {
-							"description": "API key description",
-							"apiKeyExpirationDays": "30"
+							"description": "sdfgdgf",
+							"apiKeyExpirationDays": 7
 						}
 					}
 				}

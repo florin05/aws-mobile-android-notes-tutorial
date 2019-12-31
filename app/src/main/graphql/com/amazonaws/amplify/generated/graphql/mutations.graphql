@@ -1,0 +1,94 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateDriverStatusInfo(
+  $input: CreateDriverStatusInfoInput!
+  $condition: ModelDriverStatusInfoConditionInput
+) {
+  createDriverStatusInfo(input: $input, condition: $condition) {
+    id
+    userName
+    driverStatus
+    lastStatusChange
+    latitude
+    longitude
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateDriverStatusInfo(
+  $input: UpdateDriverStatusInfoInput!
+  $condition: ModelDriverStatusInfoConditionInput
+) {
+  updateDriverStatusInfo(input: $input, condition: $condition) {
+    id
+    userName
+    driverStatus
+    lastStatusChange
+    latitude
+    longitude
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteDriverStatusInfo(
+  $input: DeleteDriverStatusInfoInput!
+  $condition: ModelDriverStatusInfoConditionInput
+) {
+  deleteDriverStatusInfo(input: $input, condition: $condition) {
+    id
+    userName
+    driverStatus
+    lastStatusChange
+    latitude
+    longitude
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateNote(
+  $input: CreateNoteInput!
+  $condition: ModelNoteConditionInput
+) {
+  createNote(input: $input, condition: $condition) {
+    id
+    title
+    content
+    blabla
+    _version
+    _deleted
+    _lastChangedAt
+    owner
+  }
+}
+mutation UpdateNote(
+  $input: UpdateNoteInput!
+  $condition: ModelNoteConditionInput
+) {
+  updateNote(input: $input, condition: $condition) {
+    id
+    title
+    content
+    blabla
+    _version
+    _deleted
+    _lastChangedAt
+    owner
+  }
+}
+mutation DeleteNote(
+  $input: DeleteNoteInput!
+  $condition: ModelNoteConditionInput
+) {
+  deleteNote(input: $input, condition: $condition) {
+    id
+    title
+    content
+    blabla
+    _version
+    _deleted
+    _lastChangedAt
+    owner
+  }
+}

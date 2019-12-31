@@ -1,0 +1,151 @@
+# this is an auto generated file. This will be overwritten
+query SyncDriverStatusInfos(
+  $filter: ModelDriverStatusInfoFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncDriverStatusInfos(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      userName
+      driverStatus
+      lastStatusChange
+      latitude
+      longitude
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetDriverStatusInfo($id: ID!) {
+  getDriverStatusInfo(id: $id) {
+    id
+    userName
+    driverStatus
+    lastStatusChange
+    latitude
+    longitude
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+query ListDriverStatusInfos(
+  $filter: ModelDriverStatusInfoFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listDriverStatusInfos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      userName
+      driverStatus
+      lastStatusChange
+      latitude
+      longitude
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query StatusByUserName(
+  $userName: ID
+  $id: ModelIDKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelDriverStatusInfoFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  statusByUserName(
+    userName: $userName
+    id: $id
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      userName
+      driverStatus
+      lastStatusChange
+      latitude
+      longitude
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetNote($id: ID!) {
+  getNote(id: $id) {
+    id
+    title
+    content
+    blabla
+    _version
+    _deleted
+    _lastChangedAt
+    owner
+  }
+}
+query ListNotes(
+  $filter: ModelNoteFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      content
+      blabla
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncNotes(
+  $filter: ModelNoteFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncNotes(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      title
+      content
+      blabla
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+    nextToken
+    startedAt
+  }
+}

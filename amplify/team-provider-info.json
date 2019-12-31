@@ -10,11 +10,6 @@
             "StackName": "amplify-stattransportation-dev-221408",
             "StackId": "arn:aws:cloudformation:us-east-1:717495249439:stack/amplify-stattransportation-dev-221408/1dd0d8e0-2920-11ea-a41e-0af77bd56d08",
             "AmplifyAppId": "d148n6tkdp62ga"
-        },
-        "categories": {
-            "auth": {
-                "cognito36220435": {}
-            }
         }
     }
 }

@@ -1,0 +1,76 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateDriverStatusInfo {
+  onCreateDriverStatusInfo {
+    id
+    userName
+    driverStatus
+    lastStatusChange
+    latitude
+    longitude
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnUpdateDriverStatusInfo {
+  onUpdateDriverStatusInfo {
+    id
+    userName
+    driverStatus
+    lastStatusChange
+    latitude
+    longitude
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnDeleteDriverStatusInfo {
+  onDeleteDriverStatusInfo {
+    id
+    userName
+    driverStatus
+    lastStatusChange
+    latitude
+    longitude
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnCreateNote($owner: String!) {
+  onCreateNote(owner: $owner) {
+    id
+    title
+    content
+    blabla
+    _version
+    _deleted
+    _lastChangedAt
+    owner
+  }
+}
+subscription OnUpdateNote($owner: String!) {
+  onUpdateNote(owner: $owner) {
+    id
+    title
+    content
+    blabla
+    _version
+    _deleted
+    _lastChangedAt
+    owner
+  }
+}
+subscription OnDeleteNote($owner: String!) {
+  onDeleteNote(owner: $owner) {
+    id
+    title
+    content
+    blabla
+    _version
+    _deleted
+    _lastChangedAt
+    owner
+  }
+}
