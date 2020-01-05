@@ -273,6 +273,8 @@ public  class AWSDataService implements DataService {
         UpdateDriverStatusInfoInput input = UpdateDriverStatusInfoInput.builder()
                 .id(status.getId())
                 .lastStatusChange( ZonedDateTime.now( ZoneOffset.UTC ).format( DateTimeFormatter.ISO_INSTANT ))
+                .latitude(status.getLatitude())
+                .longitude(status.getLongitude())
                 .userName(status.getUserName())
                 .driverStatus(status.getStatus().name())
                 ._version(status.getVersion())
@@ -292,6 +294,8 @@ public  class AWSDataService implements DataService {
                             returnedStatus.setUserName(item.userName());
                             returnedStatus.setId(item.id());
                             returnedStatus.setVersion(item._version());
+                            returnedStatus.setLongitude(item.longitude());
+                            returnedStatus.setLatitude(item.latitude());
                             runOnUiThread(() -> callback.onResult(returnedStatus));
                         }
                     }

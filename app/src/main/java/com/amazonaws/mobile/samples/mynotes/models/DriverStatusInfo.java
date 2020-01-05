@@ -10,6 +10,8 @@ public class DriverStatusInfo {
     private DriverStatus status;
     private Date lastStatusChange;
     private Integer version;
+    private Double latitude;
+    private Double longitude;
 
     public DriverStatusInfo(DriverStatus status, Date statusChangeTime ) {
         this.status = status;
@@ -36,4 +38,9 @@ public class DriverStatusInfo {
     public void setVersion(Integer version) { this.version = version;};
     public Integer getVersion() { return this.version; };
 
+    public void setLatitude(Double latitude) { this.latitude = latitude;};
+    public Double getLatitude() { return this.latitude; };
+
+    public void setLongitude(Double longitude) { this.longitude = longitude;};
+    public Double getLongitude() { return this.longitude; };
 }

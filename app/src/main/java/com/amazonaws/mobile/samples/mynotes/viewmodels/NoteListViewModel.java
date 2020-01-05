@@ -16,11 +16,16 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.amazonaws.mobile.samples.mynotes.viewmodels;
 
+import android.app.Activity;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 
+import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.paging.PagedList;
 
@@ -34,9 +39,14 @@ import com.amazonaws.mobile.samples.mynotes.services.aws.AWSDataService;
 
 import java.util.Map;
 
+
+import static android.content.Context.LOCATION_SERVICE;
+
 public class NoteListViewModel extends ViewModel {
     private MutableLiveData<DriverStatusInfo> mStatus;
     private NotesRepository notesRepository;
+
+    private static final int GPS_TIME_INTERVAL_MS = 30000;
 
 
     public NoteListViewModel() {
@@ -66,7 +76,6 @@ public class NoteListViewModel extends ViewModel {
 
     public synchronized void changeStatus(DriverStatus newStatus) {
         String userName = AWSDataService.loggedInUserName;
-        // String userName = Injection.getAWSService().getIdentityManager().getCachedUserID();
         DriverStatusInfo updatedStatus = new DriverStatusInfo(newStatus);
         updatedStatus.setUserName(userName);
         updatedStatus.setId(mStatus.getValue().getId());
@@ -74,6 +83,50 @@ public class NoteListViewModel extends ViewModel {
         notesRepository.updateDriverStatus(updatedStatus, (DriverStatusInfo status) -> {
             mStatus.postValue(status);
         });
+    }
+
+    public synchronized void changeCoordinates(LifecycleOwner activity, Double latitude, Double longitude) {
+        String userName = AWSDataService.loggedInUserName;
+
+        MutableLiveData<DriverStatusInfo> status = this.mStatus;
+
+        Observer statusUpdateObserver = new Observer<DriverStatusInfo>() {
+            @Override
+            public void onChanged(@Nullable DriverStatusInfo statusInfo) {
+                if (statusInfo != null) {
+                    DriverStatusInfo updatedStatus = new DriverStatusInfo(mStatus.getValue().getStatus());
+                    updatedStatus.setLatitude(latitude);
+                    updatedStatus.setLongitude(longitude);
+                    updatedStatus.setUserName(userName);
+                    updatedStatus.setId(mStatus.getValue().getId());
+                    updatedStatus.setVersion(mStatus.getValue().getVersion());
+                    notesRepository.updateDriverStatus(updatedStatus, (DriverStatusInfo status) -> {
+                        mStatus.postValue(status);
+                    });
+                    status.removeObserver(this);
+
+                }
+
+            }
+
+
+        };
+        mStatus.observeForever(statusUpdateObserver);
+/*
+        mStatus.observeForever().observe(activity, (DriverStatusInfo statusInfo) -> {
+            DriverStatusInfo updatedStatus = new DriverStatusInfo(mStatus.getValue().getStatus());
+            updatedStatus.setLatitude(latitude);
+            updatedStatus.setLongitude(longitude);
+            updatedStatus.setUserName(userName);
+            updatedStatus.setId(mStatus.getValue().getId());
+            updatedStatus.setVersion(mStatus.getValue().getVersion());
+            notesRepository.updateDriverStatus(updatedStatus, (DriverStatusInfo status) -> {
+                mStatus.postValue(status);
+            });
+            mStatus.removeObserver();
+        });
+*/
+
     }
 
     public void removeNote(String noteId) {
@@ -84,4 +137,6 @@ public class NoteListViewModel extends ViewModel {
             }
         });
     }
+
+
 }

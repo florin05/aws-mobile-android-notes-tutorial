@@ -16,9 +16,16 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.amazonaws.mobile.samples.mynotes.ui;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import androidx.databinding.DataBindingUtil;
+
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.fragment.app.Fragment;
@@ -61,6 +68,12 @@ public class NoteListActivity extends AppCompatActivity {
      * The analytics service
      */
     private AnalyticsService analyticsService = Injection.getAnalyticsService();
+
+    Location gpslocation = null;
+    LocationManager locationManager;
+
+    private static final int GPS_TIME_INTERVAL_MS = 30000; //
+    private static final int GPS_DISTANCE_METERS= 100;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,6 +131,15 @@ public class NoteListActivity extends AppCompatActivity {
 
         // Ensure the note list is updated whenever the repository is updated
         // viewModel.getNotesList().observe(this, adapter::submitList);
+
+        if (checkSelfPermission( android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED) {
+           this.setupLocationUpdates();
+        } else {
+            requestPermissions(
+                    new String[] { android.Manifest.permission.ACCESS_FINE_LOCATION },
+                    555);
+        }
+
     }
 
     @Override
@@ -149,4 +171,70 @@ public class NoteListActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    private LocationListener gpsListener;
+
+    private void setupLocationUpdates() {
+        setupLocationListener();
+        if (checkSelfPermission( android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED){
+            if(locationManager==null){
+                locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            }
+
+            if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                        GPS_TIME_INTERVAL_MS, GPS_DISTANCE_METERS, gpsListener);
+            }
+        }
+    }
+    void updateCoordinates(Location location) {
+        viewModel.changeCoordinates( (LifecycleOwner) this, location.getLatitude(), location.getLongitude());
+    }
+    private void setupLocationListener() {
+
+        if (gpsListener == null) {
+            gpsListener = new LocationListener(  ){
+                public void onLocationChanged(Location location) {
+                    // update location
+                    // locationManager.removeUpdates(GPSListener); // remove this listener
+                    if (gpslocation == null ||
+                            gpslocation.getLatitude() != location.getLatitude() ||
+                            gpslocation.getLongitude() != gpslocation.getLongitude() ) {
+                        updateCoordinates(location);
+                    }
+                    gpslocation = location;
+                }
+                public void onProviderDisabled(String provider) {}
+                public void onProviderEnabled(String provider) {}
+                public void onStatusChanged(String provider, int status, Bundle extras) {}
+            };
+        }
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults)
+    {
+        super
+                .onRequestPermissionsResult(requestCode,
+                        permissions,
+                        grantResults);
+
+        if (requestCode == 555) {
+
+            // Checking whether user granted the permission or not.
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                this.setupLocationUpdates();
+            }
+        }
+    }
+
+/*
+   for frequently getting current position then above object value set to 0 for both you will get continues location but it drown the battery
+*/
+
 }
