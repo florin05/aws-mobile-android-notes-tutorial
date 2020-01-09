@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
@@ -43,6 +44,7 @@ import java.util.Map;
 import static android.content.Context.LOCATION_SERVICE;
 
 public class NoteListViewModel extends ViewModel {
+    static final String LOGTAG = "DEBUGGING--------------";
     private MutableLiveData<DriverStatusInfo> mStatus;
     private NotesRepository notesRepository;
 
@@ -80,6 +82,7 @@ public class NoteListViewModel extends ViewModel {
         updatedStatus.setUserName(userName);
         updatedStatus.setId(mStatus.getValue().getId());
         updatedStatus.setVersion(mStatus.getValue().getVersion());
+        Log.d(LOGTAG, "Status posting from changeStatus value  version " + mStatus.getValue().getVersion());
         notesRepository.updateDriverStatus(updatedStatus, (DriverStatusInfo status) -> {
             mStatus.postValue(status);
         });
@@ -88,8 +91,9 @@ public class NoteListViewModel extends ViewModel {
     public synchronized void changeCoordinates(LifecycleOwner activity, Double latitude, Double longitude) {
         String userName = AWSDataService.loggedInUserName;
 
-        MutableLiveData<DriverStatusInfo> status = this.mStatus;
+        MutableLiveData<DriverStatusInfo> liveStatus = this.mStatus;
 
+        Log.d(LOGTAG, System.currentTimeMillis() + "changeCoordinates called with lat " + latitude );
         Observer statusUpdateObserver = new Observer<DriverStatusInfo>() {
             @Override
             public void onChanged(@Nullable DriverStatusInfo statusInfo) {
@@ -100,10 +104,12 @@ public class NoteListViewModel extends ViewModel {
                     updatedStatus.setUserName(userName);
                     updatedStatus.setId(mStatus.getValue().getId());
                     updatedStatus.setVersion(mStatus.getValue().getVersion());
+                    Log.d(LOGTAG, System.currentTimeMillis() + " Status posting from changeCoordinates value  version " + mStatus.getValue().getVersion());
                     notesRepository.updateDriverStatus(updatedStatus, (DriverStatusInfo status) -> {
+                        Log.d(LOGTAG, System.currentTimeMillis() + "Status changed from changeCoordinates value  version " + status.getVersion());
                         mStatus.postValue(status);
                     });
-                    status.removeObserver(this);
+                    liveStatus.removeObserver(this);
 
                 }
 

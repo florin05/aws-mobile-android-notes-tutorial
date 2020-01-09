@@ -33,6 +33,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.ItemTouchHelper;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -77,6 +79,7 @@ public class NoteListActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d("DEBUGGING--------", System.currentTimeMillis() + " NoteListActivity.onCreate");
         super.onCreate(savedInstanceState);
 
         viewModel = ViewModelProviders.of(this).get(NoteListViewModel.class);
@@ -188,6 +191,8 @@ public class NoteListActivity extends AppCompatActivity {
         }
     }
     void updateCoordinates(Location location) {
+        Log.d("DEBUGGING------", System.currentTimeMillis() + "calling update coordinates, lat: " + (gpslocation != null? gpslocation.getLatitude():"") + " new lat:" + location.getLatitude()  );
+        gpslocation = location;
         viewModel.changeCoordinates( (LifecycleOwner) this, location.getLatitude(), location.getLongitude());
     }
     private void setupLocationListener() {
@@ -197,12 +202,12 @@ public class NoteListActivity extends AppCompatActivity {
                 public void onLocationChanged(Location location) {
                     // update location
                     // locationManager.removeUpdates(GPSListener); // remove this listener
+
                     if (gpslocation == null ||
                             gpslocation.getLatitude() != location.getLatitude() ||
                             gpslocation.getLongitude() != gpslocation.getLongitude() ) {
                         updateCoordinates(location);
                     }
-                    gpslocation = location;
                 }
                 public void onProviderDisabled(String provider) {}
                 public void onProviderEnabled(String provider) {}

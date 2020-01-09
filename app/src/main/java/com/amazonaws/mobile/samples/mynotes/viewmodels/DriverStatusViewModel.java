@@ -1,5 +1,7 @@
 package com.amazonaws.mobile.samples.mynotes.viewmodels;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -33,6 +35,7 @@ public class DriverStatusViewModel extends ViewModel {
 
     public synchronized void update(DriverStatus status ) {
         DriverStatusInfo newStatus = new DriverStatusInfo(status);
+        Log.d("DEBUGGING-------", "Status posting from viewModel update value  version new ");
         notesRepository.updateDriverStatus(newStatus, (DriverStatusInfo statusInfo) -> {
             /* Do Nothing */
         });
