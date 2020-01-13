@@ -1,0 +1,114 @@
+C:\dev\samples\aws-mobile-android-notes-tutorial>amplify init
+Note: It is recommended to run this command from the root of your app directory
+? Enter a name for the project stat-transportation
+? Enter a name for the environment dev
+? Choose the type of app that you're building android
+Please tell us about your project
+? Where is your Res directory:  app/src/main/res
+Using default provider  awscloudformation
+
+For more information on AWS Profiles, see:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html
+
+? Do you want to use an AWS profile? No
+? accessKeyId:  AKIA2ODQMV**********
+? secretAccessKey:  jjbfYFHjXNsIZ8CP+jdm********************
+? region:  us-east-1
+Adding backend environment dev to AWS Amplify Console app: d2pnk00r5p429o
+| Initializing project in the cloud...
+
+CREATE_IN_PROGRESS amplify-stat-transportation-dev-170937 AWS::CloudFormation::Stack Mon Jan 13 2020 17:09:39 GMT-0500 (Eastern Standard Time) User Initiated
+CREATE_IN_PROGRESS AuthRole                               AWS::IAM::Role             Mon Jan 13 2020 17:09:43 GMT-0500 (Eastern Standard Time)
+CREATE_IN_PROGRESS DeploymentBucket                       AWS::S3::Bucket            Mon Jan 13 2020 17:09:43 GMT-0500 (Eastern Standard Time)
+CREATE_IN_PROGRESS UnauthRole                             AWS::IAM::Role             Mon Jan 13 2020 17:09:43 GMT-0500 (Eastern Standa
+rd Time)
+CREATE_IN_PROGRESS AuthRole                               AWS::IAM::Role             Mon Jan 13 2020 17:09:44 GMT-0500 (Eastern Standa
+rd Time) Resource creation Initiated
+CREATE_IN_PROGRESS UnauthRole                             AWS::IAM::Role             Mon Jan 13 2020 17:09:44 GMT-0500 (Eastern Standa
+rd Time) Resource creation Initiated
+CREATE_IN_PROGRESS DeploymentBucket                       AWS::S3::Bucket            Mon Jan 13 2020 17:09:44 GMT-0500 (Eastern Standa
+rd Time) Resource creation Initiated
+\ Initializing project in the cloud...
+
+CREATE_COMPLETE AuthRole   AWS::IAM::Role Mon Jan 13 2020 17:09:57 GMT-0500 (Eastern Standard Time)
+CREATE_COMPLETE UnauthRole AWS::IAM::Role Mon Jan 13 2020 17:09:57 GMT-0500 (Eastern Standard Time)
+| Initializing project in the cloud...
+
+CREATE_COMPLETE DeploymentBucket                       AWS::S3::Bucket            Mon Jan 13 2020 17:10:05 GMT-0500 (E
+astern Standard Time)
+CREATE_COMPLETE amplify-stat-transportation-dev-170937 AWS::CloudFormation::Stack Mon Jan 13 2020 17:10:08 GMT-0500 (E
+astern Standard Time)
+√ Successfully created initial AWS cloud resources for deployments.
+√ Initialized provider successfully.
+× There was an error initializing your environment.
+init failed
+SyntaxError: Unexpected token g in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at AmplifyToolkit.readJsonFile [as _readJsonFile] (C:\Users\Draghif\AppData\Roaming\npm\node_modules\@aws-amplify\
+cli\lib\extensions\amplify-helpers\read-json-file.js:10:17)
+    at getCurrentAWSConfig (C:\Users\Draghif\AppData\Roaming\npm\node_modules\@aws-amplify\cli\node_modules\amplify-fr
+ontend-android\lib\frontend-config-creator.js:138:25)
+    at createAWSConfig (C:\Users\Draghif\AppData\Roaming\npm\node_modules\@aws-amplify\cli\node_modules\amplify-fronte
+nd-android\lib\frontend-config-creator.js:74:28)
+    at Object.createFrontendConfigs (C:\Users\Draghif\AppData\Roaming\npm\node_modules\@aws-amplify\cli\node_modules\a
+mplify-frontend-android\index.js:27:10)
+    at AmplifyToolkit.<anonymous> (C:\Users\Draghif\AppData\Roaming\npm\node_modules\@aws-amplify\cli\lib\extensions\a
+mplify-helpers\on-category-outputs-change.js:33:41)
+    at Generator.next (<anonymous>)
+    at C:\Users\Draghif\AppData\Roaming\npm\node_modules\@aws-amplify\cli\lib\extensions\amplify-helpers\on-category-outputs-change.js:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (C:\Users\Draghif\AppData\Roaming\npm\node_modules\@aws-amplify\cli\lib\extensions\amplif
+y-helpers\on-category-outputs-change.js:4:12)
+
+C:\dev\samples\aws-mobile-android-notes-tutorial>amplify status
+
+Current Environment: dev
+
+| Category | Resource name | Operation | Provider plugin |
+| -------- | ------------- | --------- | --------------- |
+
+
+
+C:\dev\samples\aws-mobile-android-notes-tutorial>amplify add api
+? Please select from one of the below mentioned services: GraphQL
+? Provide API name: statTransportation
+? Choose the default authorization type for the API API key
+? Enter a description for the API key: Api key used for the statTransportation api
+? After how many days from now the API key should expire (1-365): 365
+? Do you want to configure advanced settings for the GraphQL API Yes, I want to make some additional changes.
+? Configure additional auth types? No
+? Configure conflict detection? Yes
+? Select the default resolution strategy Auto Merge
+? Do you have an annotated GraphQL schema? Yes
+? Provide your schema file path:
+C:\dev\samples\aws-mobile-android-notes-tutorial>amplify add api
+? Please select from one of the below mentioned services: GraphQL
+? Provide API name: statTransportation
+? Choose the default authorization type for the API API key
+? Enter a description for the API key: API Key for statTransportation
+? After how many days from now the API key should expire (1-365): 365
+? Do you want to configure advanced settings for the GraphQL API No, I am done.
+? Do you have an annotated GraphQL schema? No
+? Do you want a guided schema creation? Yes
+? What best describes your project: Single object with fields (e.g., “Todo” with ID, name, description)
+? Do you want to edit the schema now? Yes
+Please edit the file in your editor: C:\dev\samples\aws-mobile-android-notes-tutorial\amplify\backend/api/statTranspo
+rtation/schema.graphql
+? Press enter to continue
+
+The following types do not have '@auth' enabled. Consider using @auth with @model
+         - DriverStatusInfo
+Learn more about @auth here: https://aws-amplify.github.io/docs/cli-toolchain/graphql#auth
+
+
+GraphQL schema compiled successfully.
+
+Edit your schema at C:\dev\samples\aws-mobile-android-notes-tutorial\amplify\backend\api\statTransportation\schema.gr
+aphql or place .graphql files in a directory at C:\dev\samples\aws-mobile-android-notes-tutorial\amplify\backend\api\
+statTransportation\schema
+Successfully added resource statTransportation locally
+
+Some next steps:
+"amplify push" will build all your local backend resources and provision it in the cloud
+"amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and p
+rovision it in the cloud
