@@ -112,3 +112,47 @@ Some next steps:
 "amplify push" will build all your local backend resources and provision it in the cloud
 "amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and p
 rovision it in the cloud
+
+
+******************************************************************************************
+
+C:\dev\samples\aws-mobile-android-notes-tutorial>amplify add auth
+Using service: Cognito, provided by: awscloudformation
+
+ The current configured provider is Amazon Cognito.
+
+ Do you want to use the default authentication and security configuration? Default configuration
+ Warning: you will not be able to edit these selections.
+ How do you want users to be able to sign in? Username
+ Do you want to configure advanced settings? No, I am done.
+Successfully added resource stattransportationcd149d03 locally
+
+Some next steps:
+"amplify push" will build all your local backend resources and provision it in the cloud
+"amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud
+
+
+C:\dev\samples\aws-mobile-android-notes-tutorial>amplify status
+
+Current Environment: dev
+
+| Category | Resource name              | Operation | Provider plugin   |
+| -------- | -------------------------- | --------- | ----------------- |
+| Auth     | stattransportationcd149d03 | Create    | awscloudformation |
+| Api      | statTransportation         | No Change | awscloudformation |
+
+GraphQL endpoint: https://dg52icycrjgovhvmisujpcgjty.appsync-api.us-east-1.amazonaws.com/graphql
+GraphQL API KEY: da2-rj2dz5yakvdktmevdc6nroogsu
+
+
+C:\dev\samples\aws-mobile-android-notes-tutorial>amplify push
+√ Successfully pulled backend environment dev from the cloud.
+
+Current Environment: dev
+
+| Category | Resource name              | Operation | Provider plugin   |
+| -------- | -------------------------- | --------- | ----------------- |
+| Auth     | stattransportationcd149d03 | Create    | awscloudformation |
+| Api      | statTransportation         | No Change | awscloudformation |
+? Are you sure you want to continue? Yes
+| Updating resources in the cloud. This may take a few minutes...

@@ -38,39 +38,3 @@ subscription OnDeleteDriverStatusInfo {
     _lastChangedAt
   }
 }
-subscription OnCreateNote($owner: String!) {
-  onCreateNote(owner: $owner) {
-    id
-    title
-    content
-    blabla
-    _version
-    _deleted
-    _lastChangedAt
-    owner
-  }
-}
-subscription OnUpdateNote($owner: String!) {
-  onUpdateNote(owner: $owner) {
-    id
-    title
-    content
-    blabla
-    _version
-    _deleted
-    _lastChangedAt
-    owner
-  }
-}
-subscription OnDeleteNote($owner: String!) {
-  onDeleteNote(owner: $owner) {
-    id
-    title
-    content
-    blabla
-    _version
-    _deleted
-    _lastChangedAt
-    owner
-  }
-}
