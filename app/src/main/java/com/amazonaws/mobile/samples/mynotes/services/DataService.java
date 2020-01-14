@@ -27,47 +27,6 @@ import com.amazonaws.mobile.samples.mynotes.models.ResultCallback;
  * Each call should be async and run on a background thread.
  */
 public interface DataService {
-    /**
-     * Load a single page of notes.
-     *
-     * @param limit the requested number of items
-     * @param after the "next token" from a prior call
-     * @param callback the response from the server
-     */
-    void loadNotes(int limit, String after, ResultCallback<PagedListConnectionResponse<Note>> callback);
-
-    /**
-     * Load a single note
-     *
-     * @param noteId the request ID
-     * @param callback the response from the server
-     */
-    void getNote(String noteId, ResultCallback<Note> callback);
-
-    /**
-     * Create a new note a note to the backing store
-     *
-     * @param title the title of the new note
-     * @param content the content for the new note
-     * @param callback the response from the server (null would indicate that the operation failed)
-     */
-    void createNote(String title, String content, ResultCallback<Note> callback);
-
-    /**
-     * Update an existing note in the backing store
-     *
-     * @param note the new contents of the note
-     * @param callback the response from the server (null would indicate that the operation failed)
-     */
-    void updateNote(Note note, ResultCallback<Note> callback);
-
-    /**
-     * Delete a note from the backing store
-     *
-     * @param noteId the ID of the note to be deleted
-     * @param callback the response from the server (Boolean = true indicates success)
-     */
-    void deleteNote(String noteId, ResultCallback<Boolean> callback);
 
     void createDriverStatusInfo(String userName, DriverStatus status, ResultCallback<DriverStatusInfo> callback);
 

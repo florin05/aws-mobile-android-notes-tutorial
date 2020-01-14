@@ -135,14 +135,7 @@ public class NoteListViewModel extends ViewModel {
 
     }
 
-    public void removeNote(String noteId) {
-        notesRepository.delete(noteId, new ResultCallback<Boolean>() {
-            @Override
-            public void onResult(Boolean result) {
-                /* Do nothing */
-            }
-        });
-    }
+
 
 
 }

@@ -58,39 +58,7 @@ public class NoteDetailFragment extends Fragment {
         contentField.setEnabled(false);
 
         viewModel = ViewModelProviders.of(this).get(NoteDetailViewModel.class);
-        // Observe the view model values.  Once we receive the value, enable the field.
-        viewModel.getTitle().observe(this, (String title) -> {
-            titleField.setText(title);
-            titleField.setEnabled(true);
-        });
-        viewModel.getContent().observe(this, (String content) -> {
-            contentField.setText(content);
-            contentField.setEnabled(true);
-        });
 
-        // If this is a new note, create the note, then enable the fields.  Otherwise just load the fields
-        // - the fields are received via observables
-        if (noteId == null) {
-            viewModel.create("", "", (Note result) -> {
-                titleField.setEnabled(true);
-                contentField.setEnabled(true);
-            });
-        } else {
-            viewModel.setNoteId(noteId);
-        }
-
-        TextWatcher saveHandler = new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
-            @Override public void afterTextChanged(Editable s) {
-                String title = titleField.getText().toString();
-                String content = contentField.getText().toString();
-                viewModel.update(title, content);
-            }
-        };
-
-        titleField.addTextChangedListener(saveHandler);
-        contentField.addTextChangedListener(saveHandler);
 
         return view;
     }

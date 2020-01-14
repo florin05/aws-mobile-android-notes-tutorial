@@ -37,37 +37,5 @@ public class NoteDetailViewModel extends ViewModel {
         this.mContent = new MutableLiveData<>();
     }
 
-    public void setNoteId(final String noteId) {
-        this.noteId = noteId;
-        notesRepository.get(noteId, (Note result) -> {
-            if (result != null)
-                mTitle.postValue(result.getTitle());
-                mContent.postValue(result.getContent());
-                this.noteId = result.getNoteId();
-        });
-    }
 
-    public LiveData<String> getTitle() {
-        return mTitle;
-    }
-
-    public LiveData<String> getContent() {
-        return mContent;
-    }
-
-    public synchronized void create(String title, String content, ResultCallback<Note> callback) {
-        notesRepository.create(title, content, (Note result) -> {
-            if (result != null) {
-                noteId = result.getNoteId();
-                callback.onResult(result);
-            }
-        });
-    }
-
-    public synchronized void update(String title, String content) {
-        Note newNote = new Note(noteId, title, content);
-        notesRepository.update(newNote, (Note result) -> {
-            /* Do Nothing */
-        });
-    }
 }

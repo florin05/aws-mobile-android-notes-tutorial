@@ -26,7 +26,7 @@ import com.amazonaws.mobile.samples.mynotes.services.DataService;
  * of reverse paging or because the list has been altered), we have to create a new
  * data source.
  */
-public class NotesDataSourceFactory extends DataSource.Factory<String, Note> {
+public class NotesDataSourceFactory {
     private DataService dataService;
     // private MutableLiveData<NotesDataSource> mDataSource;
     private NotesDataSource mDataSource;
@@ -43,8 +43,8 @@ public class NotesDataSourceFactory extends DataSource.Factory<String, Note> {
         return mDataSource;
     }
 
-    @Override
-    public DataSource<String, Note> create() {
+//    @Override
+    public NotesDataSource create() {
         //NotesDataSource dataSource = new NotesDataSource(dataService);
         mDataSource = new NotesDataSource(dataService);
         return mDataSource;

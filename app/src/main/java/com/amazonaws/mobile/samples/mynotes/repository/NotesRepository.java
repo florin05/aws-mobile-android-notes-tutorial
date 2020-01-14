@@ -37,42 +37,6 @@ public class NotesRepository {
         // getDriverStatus((DriverStatusInfo status) -> driverStatus.postValue(status) );
     }
 
-    /**
-     * An observable lifecycle-aware version of the paged list of notes.  This is used
-     * to render a RecyclerView of all the notes.
-     */
-/*    public LiveData<PagedList<Note>> getPagedList() {
-        return pagedList;
-    }*/
-
-    /**
-     * API operation to create an item in the data store
-     */
-    public void create(String title, String content, ResultCallback<Note> callback) {
-        dataSource.createItem(title, content, callback);
-    }
-
-    /**
-     * API operation to update an item in the data store
-     */
-    public void update(Note note, ResultCallback<Note> callback) {
-        dataSource.updateItem(note, callback);
-    }
-
-    /**
-     * API operation to delete an item from the data store
-     */
-    public void delete(String noteId, ResultCallback<Boolean> callback) {
-        dataSource.deleteItem(noteId, callback);
-    }
-
-    /**
-     * API operation to get an item from the data store
-     */
-    public void get(String noteId, ResultCallback<Note> callback) {
-        dataSource.getItem(noteId, callback);
-    }
-
     public void getDriverStatus(ResultCallback<DriverStatusInfo> callback) {
         dataSource.getDriverStatus(callback);
     }

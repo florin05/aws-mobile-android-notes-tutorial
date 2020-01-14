@@ -123,13 +123,7 @@ public class NoteListActivity extends AppCompatActivity {
         // Create the adapter that will be used to load items into the recycler view
         final NoteListAdapter adapter = new NoteListAdapter((Note item) -> loadNoteDetailFragment(item.getNoteId()));
 
-        // Create the swipe-to-delete handler
-        SwipeToDelete swipeHandler = new SwipeToDelete(this, (Note item) -> viewModel.removeNote(item.getNoteId()));
-        ItemTouchHelper swipeToDelete = new ItemTouchHelper(swipeHandler);
 
-        // Configure the note list
-        RecyclerView note_list = findViewById(R.id.note_list);
-        swipeToDelete.attachToRecyclerView(note_list);
         // note_list.setAdapter(adapter);
 
         // Ensure the note list is updated whenever the repository is updated
