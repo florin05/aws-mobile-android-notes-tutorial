@@ -62,7 +62,7 @@ public  class AWSDataService implements DataService {
         client = AWSAppSyncClient.builder()
                 .context(context)
                 .awsConfiguration(config)
-                .apiKey(new BasicAPIKeyAuthProvider("da2-7pllxyhtm5d6rgixvy2xq3kwaa"))
+                .apiKey(new BasicAPIKeyAuthProvider("da2-rj2dz5yakvdktmevdc6nroogsu"))
                 .build();
     }
 
@@ -77,7 +77,7 @@ public  class AWSDataService implements DataService {
                     @Override
                     public void onResponse(@Nonnull Response<StatusByUserNameQuery.Data> response) {
                         StatusByUserNameQuery.StatusByUserName result = response.data().statusByUserName();
-                        if (result == null) {
+                        if (result == null || result.items().size() == 0 ) {
                             runOnUiThread(() -> callback.onResult(null));
                         } else {
                             StatusByUserNameQuery.Item driverStatusInfoInDb =  result.items().get(0); // only expecting one
